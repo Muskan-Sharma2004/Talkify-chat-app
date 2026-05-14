@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import './LeftSideBar.css'
 import assets from '../../assets/assets'
 import { useNavigate } from "react-router-dom";
-import { arrayUnion, collection,doc ,getDoc, query, serverTimestamp, setDoc, updateDoc, where} from 'firebase/firestore';
+import { arrayUnion, collection,doc ,getDoc,getDocs, query, serverTimestamp, setDoc, updateDoc, where} from 'firebase/firestore';
 import {db} from '../../config/firebase';
 import { AppContext } from '../../context/AppContext';
 import { toast } from 'react-toastify';
@@ -101,7 +101,7 @@ const addChat = async () => {
    const uSnap = await getDoc(doc(db,"users",user.id));
    const uData = uSnap.data();
    setChat({
-    messagesId:newMessageRef.id,
+    messageId:newMessageRef.id,
     lastMessage:"",
     rId:user.id,
     updatedAt:Date.now(),
