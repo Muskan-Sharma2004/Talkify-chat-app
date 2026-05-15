@@ -38,9 +38,10 @@ if (userData.avatar && userData.name) {
         navigate('/profile')
       }
 
-      await updateDoc(userRef,{
-        lastSeen:Date.now()
-      })
+     await updateDoc(userRef,{
+        lastSeen:Date.now(),
+        isOnline:true
+        })
       setInterval(async() => {
         if(auth.chatUser){
               await updateDoc(userRef,{
@@ -63,11 +64,14 @@ if (userData.avatar && userData.name) {
         const chatItems = res.data().chatData;
         const tempData = [];
         for(const item of chatItems ){
-          const userRef = doc(db,'users', item.rId);
-          const userSnap = await getDoc(userRef);
-          const userData = userSnap.data();
-          tempData.push({...item,userData})
-        }
+            const userRef = doc(db,'users', item.rId);
+            const userSnap = await getDoc(userRef);
+            const userData = userSnap.data();
+  
+           if(userData && userData.name && userData.avatar){
+           tempData.push({...item,userData})
+          }
+          }
         setChatData(tempData.sort((a,b)=> b.updatedAt - a.updatedAt))
       })
       return ()=>{

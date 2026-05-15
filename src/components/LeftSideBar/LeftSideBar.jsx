@@ -192,10 +192,13 @@ const setChat = async (item) => {
           <img src={user.avatar} alt=""/>
           <p>{user.name}</p>
         </div>
-        :chatData?.map((item,index)=>(
+        :chatData?.filter(item => item.userData?.name && item.userData?.avatar).map((item,index)=>(
                 <div onClick={()=>setChat(item)} key={index} className={`friends ${item.messageSeen || item.messageId === messagesId ? "" : "border"}`}>
-            <img src={item.userData?.avatar} alt="" />
-            <div>
+            <div className="avatar-wrapper">
+                  <img src={item.userData?.avatar} alt="" />
+                  {Date.now() - item.userData?.lastSeen <= 70000 && <span className="green-dot"></span>}
+                  </div>
+             <div>
                 <p>{item.userData?.name}</p>
                 <span>{item.lastMessage}</span>
             </div>

@@ -60,7 +60,7 @@
     cursor: pointer;
     font-size: 13px;
 }
-.friends div{
+.friends > div:last-child {
     display: flex;
     flex-direction: column;
 }
@@ -117,3 +117,18 @@
         display: none ;
     }
 }
+ .avatar-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .green-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    border: 2px solid #001030;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+     }
